@@ -2209,12 +2209,19 @@ string(duration('1m1ms')) // "60.001s"
     (identity)
 *   `timestamp(string) -> google.protobuf.Timestamp` (type conversion, according
     to RFC3339)
+*   `timestamp(int) -> google.protobuf.Timestamp` (type conversion from Unix
+    epoch seconds in the range `[-62135596800, 253402300799]`, corresponding to
+    `0001-01-01T00:00:00Z` through `9999-12-31T23:59:59Z`)
 
 **Examples:**
 
 ```
 // google.protobuf.Timestamp representing August 26, 2023 at 12:39 PM PDT
 timestamp("2023-08-26T12:39:00-07:00")
+// google.protobuf.Timestamp representing the Unix epoch
+timestamp(0) // 1970-01-01T00:00:00Z
+// google.protobuf.Timestamp representing August 26, 2023 at 19:39:00 UTC
+timestamp(1693078740) // 2023-08-26T19:39:00Z
 ```
 
 **type** `type` \- Type denotation
