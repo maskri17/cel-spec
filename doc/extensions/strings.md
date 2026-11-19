@@ -60,3 +60,37 @@ Optional. In the form of a period `.` followed by a required positive decimal di
 '%.3f'.format([123.4999]) // 123.500
 '%.3f'.format([123.4994]) // 123.499
 ```
+
+## string.lowerAscii() -> string
+
+Returns a new string where all ASCII uppercase characters (`'A'`–`'Z'`) are
+converted to lowercase (`'a'`–`'z'`).
+
+This function uses receiver call style only and does not perform Unicode case
+mapping for characters outside the ASCII range; non-ASCII UTF-8 characters are
+left unchanged.
+
+### Examples
+
+```
+'TacoCat'.lowerAscii()      // 'tacocat'
+'TacoCÆt'.lowerAscii()      // 'tacocÆt'
+'TacoCÆt Xii'.lowerAscii()  // 'tacocÆt xii'
+```
+
+## string.upperAscii() -> string
+
+Returns a new string where all ASCII lowercase characters (`'a'`–`'z'`) are
+converted to uppercase (`'A'`–`'Z'`).
+
+This function uses receiver call style only and does not perform Unicode case
+mapping for characters outside the ASCII range; non-ASCII UTF-8 characters are
+left unchanged.
+
+### Examples
+
+```
+'tacoCat'.upperAscii()      // 'TACOCAT'
+'tacoCαt'.upperAscii()      // 'TACOCαT'
+'TacoCÆt Xii'.upperAscii()  // 'TACOCÆT XII'
+```
