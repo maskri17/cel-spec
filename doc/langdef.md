@@ -1033,9 +1033,64 @@ styles are non-overlapping per definition, regardless of their types.
 
 ## Standard Definitions
 
-All predefined operators, functions and constants are listed in the table below.
-For each symbol, the available overloads are listed. Operator symbols use a
-notation like `_+_` where `_` is a placeholder for an argument.
+### List of Standard Definitions
+
+All predefined operators, macros, functions, types, and constants are listed in
+the table below, along with links to their detailed signatures and examples.
+Operator and function signatures use `_` as a placeholder for an operand or
+argument (for example, `_+_` denotes binary addition).
+
+| Symbol | Category | Description & Detailed Section |
+|---|---|---|
+| `true`, `false`, `null` | Constants | Boolean and null literals ([Booleans and Null](#booleans-and-null)) |
+| `has(message.field)` | Macro | Field/key presence test ([Presence and Comprehension Macros](#presence-and-comprehension-macros)) |
+| `_.all(var, pred)` | Macro | Universal quantifier over list elements or map keys ([Presence and Comprehension Macros](#presence-and-comprehension-macros)) |
+| `_.exists(var, pred)` | Macro | Existential quantifier over list elements or map keys ([Presence and Comprehension Macros](#presence-and-comprehension-macros)) |
+| `_.exists_one(var, pred)` | Macro | Exactly-one quantifier over list elements or map keys ([Presence and Comprehension Macros](#presence-and-comprehension-macros)) |
+| `_.filter(var, pred)` | Macro | Filter list elements or map keys matching predicate ([Presence and Comprehension Macros](#presence-and-comprehension-macros)) |
+| `_.map(var, expr)`, `_.map(var, pred, expr)` | Macro | Transform list elements or map keys (optionally filtered) ([Presence and Comprehension Macros](#presence-and-comprehension-macros)) |
+| `!_` | Logical | Logical NOT ([Logical Operators](#logical-operators)) |
+| `_ \|\| _` | Logical | Commutative, short-circuiting logical OR ([Logical Operators](#logical-operators)) |
+| `_ && _` | Logical | Commutative, short-circuiting logical AND ([Logical Operators](#logical-operators)) |
+| `_ ? _ : _` | Logical | Conditional ternary operator ([Logical Operators](#logical-operators)) |
+| `-_` | Arithmetic | Unary numeric negation (`int`, `double`) ([Arithmetic Operators](#arithmetic-operators)) |
+| `_+_` | Arithmetic | Addition (`int`, `uint`, `double`, `timestamp`/`duration`) and concatenation (`string`, `bytes`, `list`) ([Arithmetic Operators](#arithmetic-operators)) |
+| `_-_` | Arithmetic | Subtraction (`int`, `uint`, `double`, `timestamp`/`duration`) ([Arithmetic Operators](#arithmetic-operators)) |
+| `_/_` | Arithmetic | Division (`int`, `uint`, `double`) ([Arithmetic Operators](#arithmetic-operators)) |
+| `_%_` | Arithmetic | Modulo (`int`, `uint`) ([Arithmetic Operators](#arithmetic-operators)) |
+| `_*_` | Arithmetic | Multiplication (`int`, `uint`, `double`) ([Arithmetic Operators](#arithmetic-operators)) |
+| `_==_`, `_!=_` | Comparison | Equality and inequality across comparable types ([Equality](#equality), [Comparison Operators](#comparison-operators)) |
+| `_<=_`, `_<_`, `_>=_`, `_>_` | Comparison | Ordering across numbers, `bool`, `string`, `bytes`, `timestamp`, `duration` ([Ordering](#ordering), [Comparison Operators](#comparison-operators)) |
+| `_[_]` | Collection | List index lookup or map key lookup ([List Operators](#list-operators), [Map Operators](#map-operators)) |
+| `_ in _` | Collection | List element or map key membership test ([List Operators](#list-operators), [Map Operators](#map-operators)) |
+| `size(_)`, `_.size()` | Collection / String / Bytes | Length in elements, entries, bytes, or Unicode codepoints ([List Operators](#list-operators), [Map Operators](#map-operators), [Bytes Functions](#bytes-functions), [String Functions](#string-functions)) |
+| `_.contains(_)` | String | Substring containment check ([String Functions](#string-functions)) |
+| `_.endsWith(_)` | String | Suffix check ([String Functions](#string-functions)) |
+| `matches(_, _)`, `_.matches(_)` | String | RE2 regular expression substring match ([Regular Expressions](#regular-expressions), [String Functions](#string-functions)) |
+| `_.startsWith(_)` | String | Prefix check ([String Functions](#string-functions)) |
+| `_.getDate()`, `_.getDate(_)` | Date/Time | Day of month (1-based) from timestamp ([Date/Time Functions](#datetime-functions)) |
+| `_.getDayOfMonth()`, `_.getDayOfMonth(_)` | Date/Time | Day of month (0-based) from timestamp ([Date/Time Functions](#datetime-functions)) |
+| `_.getDayOfWeek()`, `_.getDayOfWeek(_)` | Date/Time | Day of week (0 for Sunday) from timestamp ([Date/Time Functions](#datetime-functions)) |
+| `_.getDayOfYear()`, `_.getDayOfYear(_)` | Date/Time | Day of year (0-based) from timestamp ([Date/Time Functions](#datetime-functions)) |
+| `_.getFullYear()`, `_.getFullYear(_)` | Date/Time | Year from timestamp ([Date/Time Functions](#datetime-functions)) |
+| `_.getHours()`, `_.getHours(_)` | Date/Time | Hour of timestamp or duration converted to hours ([Date/Time Functions](#datetime-functions)) |
+| `_.getMilliseconds()`, `_.getMilliseconds(_)` | Date/Time | Millisecond component of timestamp or duration ([Date/Time Functions](#datetime-functions)) |
+| `_.getMinutes()`, `_.getMinutes(_)` | Date/Time | Minute of timestamp or duration converted to minutes ([Date/Time Functions](#datetime-functions)) |
+| `_.getMonth()`, `_.getMonth(_)` | Date/Time | Month (0-based) from timestamp ([Date/Time Functions](#datetime-functions)) |
+| `_.getSeconds()`, `_.getSeconds(_)` | Date/Time | Second of timestamp or duration converted to seconds ([Date/Time Functions](#datetime-functions)) |
+| `bool`, `bool(_)` | Type / Conversion | Type denotation and string-to-bool conversion ([Types and Conversions](#types-and-conversions)) |
+| `bytes`, `bytes(_)` | Type / Conversion | Type denotation and string-to-bytes conversion ([Types and Conversions](#types-and-conversions)) |
+| `double`, `double(_)` | Type / Conversion | Type denotation and numeric/string conversion to double ([Types and Conversions](#types-and-conversions)) |
+| `duration(_)` | Conversion | Parse duration string (`duration("1h30m")`) ([Types and Conversions](#types-and-conversions)) |
+| `dyn(_)` | Type / Conversion | Mark expression as dynamically typed during checking ([Types and Conversions](#types-and-conversions)) |
+| `int`, `int(_)` | Type / Conversion | Type denotation and conversion to `int` ([Types and Conversions](#types-and-conversions)) |
+| `list` | Type | List type denotation `list(dyn)` ([Types and Conversions](#types-and-conversions)) |
+| `map` | Type | Map type denotation `map(dyn, dyn)` ([Types and Conversions](#types-and-conversions)) |
+| `null_type` | Type | Type denotation for `null` ([Types and Conversions](#types-and-conversions)) |
+| `string`, `string(_)` | Type / Conversion | Type denotation and conversion to `string` ([Types and Conversions](#types-and-conversions)) |
+| `timestamp(_)` | Conversion | Parse or convert to `google.protobuf.Timestamp` ([Types and Conversions](#types-and-conversions)) |
+| `type`, `type(_)` | Type / Introspection | Type of `type` values and runtime type inspection ([Types and Conversions](#types-and-conversions)) |
+| `uint`, `uint(_)` | Type / Conversion | Type denotation and conversion to `uint` ([Types and Conversions](#types-and-conversions)) |
 
 ### Equality
 
